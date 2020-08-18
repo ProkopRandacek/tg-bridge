@@ -97,8 +97,8 @@ class Bot(Client):
         # users = client.searchForUsers(thread.first_name + " " + thread.last_name)
         # user = users[0]
         # print(user.url)
-        print(thread.url)
-        print(thread.photo)
+        # print(thread.url)
+        # print(thread.photo)
 
         tgChatId = self.tgRequestChat(Bridges.fb)
         if tgChatId == -1:
@@ -121,7 +121,7 @@ class Bot(Client):
 
         with Image.open("tmp.jpeg") as img:
             resz = img.resize((600, 600))
-            resz.save("tmp.jpeg", image.format)
+            resz.save("tmp.jpeg")
 
         self.tgUpdateChat(tgChatId, c.title, "tmp.jpeg")
 

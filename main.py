@@ -1,6 +1,6 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from bridges import Bridges
-import threading
+import threading, os
 import fbbridge
 
 
@@ -72,7 +72,7 @@ class Bridge:
                 self.chats[i] = (
                     self.chats[i][0],
                     bridgeType,
-                )  # self.chats[i][1] = bridgeType
+                )  # = self.chats[i][1] = bridgeType
                 self.sendMessage("This chat got connected", self.chats[i][0].id)
                 return self.chats[i][0].id
         return -1
@@ -80,9 +80,10 @@ class Bridge:
     def updateChat(self, chatId, title, photo):
         chat = self.getChatById(chatId)[0]
 
-        chat.title = title
         self.bot.setChatTitle(chatId, title)
         self.bot.setChatPhoto(chatId, open(photo, "rb"))
+
+        os.remove(photo)
 
 
 if __name__ == "__main__":
